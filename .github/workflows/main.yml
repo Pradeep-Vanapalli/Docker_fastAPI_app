@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Scripts
+        run: |
+          docker build -t app .
+          docker login -u pradeep1995 -p dckr_pat_y9d3YbGVuDMbfQDUR6LZ4PBCBt4
+          docker tag app pradeep1995/fastapi
+          docker push pradeep1995/fastapi
+          
+          
+    
